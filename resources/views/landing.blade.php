@@ -38,7 +38,7 @@
     .ambilSendiri,
     .datangKeRumah,
     .tawarHarga{
-      background-image: url(ambilSendiri.jpg);
+      background-image: url(bagiresep.jpeg);
     }
     .datangKeRumah{
       background-image: url(datangKeRumah.jpg);
@@ -203,8 +203,8 @@
           <div class="border border-2 lg:flex-1 xl:flex-1 rounded-2xl sm:mb-12 shadow-lg overflow-hidden">
             <div class="ambilSendiri h-[450px] lg:h-[300px] md:h-[250px] w-full bg-cover bg-no-repeat"></div>
             <div class="container font-sans">
-              <h1 class="m-8 text-green text-4xl font-semibold mx-8 sm:mt-10 md:mt-10">Ambil sendiri</h1>
-              <p class="text-justify text-navy text-xl font-regular m-8">Konsumen pilih waktu ambil yang nyaman, pengalaman belanja efisien. "Ambil Sendiri" dukung penjual, kurangi biaya kirim, dan tingkatkan keterlibatan konsumen.</p>
+              <h1 class="m-8 text-green text-4xl font-semibold mx-8 sm:mt-10 md:mt-10">Bagi resep</h1>
+              <p class="text-justify text-navy text-xl font-regular m-8">memungkinkan pengguna berbagi resep favorit secara praktis. Dengan fitur ini, pengguna dapat dengan mudah menemukan, mencoba, dan berkolaborasi dalam menciptakan hidangan lezat.</p>
             </div>
           </div>
 
@@ -236,15 +236,15 @@
         <div class="w-full border border-2 border-green rounded-2xl shadow-md m-8 mx-10 lg:flex lg:flex-row lg:mb-40 lg:mx-20" data-aos="fade-up"
         data-aos-anchor-placement="bottom-bottom" data-aos-duration="800" data-aos-offset="-500">
           <img class="w-full max-w-screen-2xl" src="hubungi kami.png">
-          <div class="flex flex-col font-sans p-10 lg:gap-y-4 w-full">
+          <form name="submit-to-google-sheet" class="flex flex-col font-sans p-10 lg:gap-y-4 w-full">
             <label class="ml-4 mt-8 lg:mt-0 lg:pt-8 font-semibold text-2xl" for="nama">Nama</label>
             <input type="text" id="name" name="nama" class="w-full border border-2 border-navy rounded-lg my-4 lg:py-4 h-12 px-4">
             <label class="ml-4 font-semibold text-2xl mt-6" for="email">Email</label>
             <input type="text" id="email" name="email" class="w-full border border-2 border-navy rounded-lg my-4 lg:py-4 h-12 px-4">
             <label class="ml-4 font-semibold text-2xl mt-6" for="pesan">Pesan</label>
             <textarea name="pesan" id="pesan" cols="35" rows="5" class="w-full border border-2 border-navy rounded-lg my-4 p-4 lg:mb-4"></textarea>
-            <button class="border border-2 border-green text-2xl bg-green font-sans hover:bg-white hover:text-green text-white rounded-lg cursor-pointer py-6 my-6 sm:px-24 sm:py-4 md:py-6 lg:px-6 lg:py-4 lg:mt-14 lg:my-0 transition duration-300 lg:mr-80">Kirim</button>
-          </div>
+            <button type="submit" class="border border-2 border-green text-2xl bg-green font-sans hover:bg-white hover:text-green text-white rounded-lg cursor-pointer py-6 my-6 sm:px-24 sm:py-4 md:py-6 lg:px-6 lg:py-4 lg:mt-14 lg:my-0 transition duration-300 lg:mr-80">Kirim</button>
+          </form>
         </div>
       </div class="mb-12">
     </main>
@@ -322,6 +322,18 @@
               navMenu.classList.add('hidden')
           }
       });
+
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzDuGLzYybjUs510-gvmS2NQWlbIyfU86xrDcGw90eK0B9_ueVLZXFTiO2j4e2rLLVz/exec'
+      const form = document.forms['submit-to-google-sheet']
+
+      form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+      form.reset()
+      });
+      
     </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
